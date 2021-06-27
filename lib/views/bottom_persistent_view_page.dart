@@ -70,5 +70,4 @@ class BottomPersistentViewPage extends StatelessWidget {
       ),
     ];
   }
-
 }

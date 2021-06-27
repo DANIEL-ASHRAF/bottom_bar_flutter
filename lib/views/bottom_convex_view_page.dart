@@ -1,4 +1,4 @@
-//the best 1 also XD
+import 'package:bottom_bar/helper/navigator_page.dart';
 import 'package:bottom_bar/views/fifth_view_page.dart';
 import 'package:bottom_bar/views/first_view_page.dart';
 import 'package:bottom_bar/views/fourth_view_page.dart';
@@ -15,10 +15,20 @@ class BottomConvexViewPage extends StatefulWidget {
 
 class _BottomConvexViewPageState extends State<BottomConvexViewPage> {
   int _selectedIndex=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _buildPages(),
+        body: IndexedStack(
+          index:_selectedIndex,
+          children: [
+            NavigatorPage(child: FirstViewPage()),
+            NavigatorPage(child: SecondViewPage()),
+            NavigatorPage(child: ThirdViewPage()),
+            NavigatorPage(child: FourthViewPage()),
+            NavigatorPage(child: FifthViewPage()),
+          ],
+        ),
         bottomNavigationBar: ConvexAppBar(
           top: -20,
           items: [
@@ -28,28 +38,11 @@ class _BottomConvexViewPageState extends State<BottomConvexViewPage> {
             TabItem(icon: Icons.message, title: 'Message'),
             TabItem(icon: Icons.people, title: 'Profile'),
           ],
-          initialActiveIndex: 0,//optional, default as 0
+          initialActiveIndex: _selectedIndex,//optional, default as 0
           onTap: (int index) =>setState(() {
             _selectedIndex = index;
           }),
         )
     );
-  }
-
-  Widget _buildPages() {
-    switch(_selectedIndex){
-      case 0:
-        return FirstViewPage();
-      case 1:
-        return SecondViewPage();
-      case 2:
-        return ThirdViewPage();
-      case 3:
-        return FourthViewPage();
-      case 4:
-        return FifthViewPage();
-      default :
-        return FirstViewPage();
-    }
   }
 }

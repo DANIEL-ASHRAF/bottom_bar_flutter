@@ -1,4 +1,4 @@
-//the best 1
+import 'package:bottom_bar/helper/navigator_page.dart';
 import 'package:bottom_bar/views/first_view_page.dart';
 import 'package:bottom_bar/views/second_view_page.dart';
 import 'package:bottom_bar/views/third_view_page.dart';
@@ -17,7 +17,15 @@ class _BottomNavyViewPageState extends State<BottomNavyViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildPages(),
+        body: IndexedStack(
+          index:_selectedIndex,
+          children: [
+            NavigatorPage(child: FirstViewPage()),
+            NavigatorPage(child: SecondViewPage()),
+            NavigatorPage(child: ThirdViewPage()),
+            NavigatorPage(child: FourthViewPage()),
+          ],
+        ),
         bottomNavigationBar: BottomNavyBar(
           selectedIndex: _selectedIndex,
           showElevation: true, // use this to remove appBar's elevation
@@ -56,18 +64,19 @@ class _BottomNavyViewPageState extends State<BottomNavyViewPage> {
     );
   }
 
-  Widget _buildPages() {
-    switch(_selectedIndex){
-      case 0:
-        return FirstViewPage();
-      case 1:
-        return SecondViewPage();
-      case 2:
-        return ThirdViewPage();
-      case 3:
-        return FourthViewPage();
-      default :
-        return FirstViewPage();
-    }
-  }
+  //Bye Bye XD
+//  Widget _buildPages() {
+//    switch(_selectedIndex){
+//      case 0:
+//        return FirstViewPage();
+//      case 1:
+//        return SecondViewPage();
+//      case 2:
+//        return ThirdViewPage();
+//      case 3:
+//        return FourthViewPage();
+//      default :
+//        return FirstViewPage();
+//    }
+//  }
 }

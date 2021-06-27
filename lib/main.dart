@@ -1,14 +1,22 @@
-import 'package:bottom_bar/views/bottom_convex_view_page.dart';
-import 'package:bottom_bar/views/bottom_navy_view_page.dart';
-import 'package:bottom_bar/views/bottom_persistent_view_page.dart';
+import 'package:bottom_bar/provider/tab_value.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:provider/provider.dart';
+import 'app/app.locator.dart';
+import 'app/app.router.dart';
 
-void main() {
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
   runApp(
     DevicePreview(
       enabled: false,
-      builder: (context) => MyApp(), // Wrap your app
+      builder: (context) =>
+        MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => TabValue()),
+            ],
+          child: MyApp()), // Wrap your app
     ),
   );
 }
@@ -25,7 +33,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BottomPersistentViewPage(),
+      initialRoute: Routes.bottomConvexViewPage,
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }
